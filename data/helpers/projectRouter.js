@@ -15,6 +15,17 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id/actions", validateId, (req, res) => {
+  const id = req.params.id;
+  Project.getProjectActions(id)
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "cannot retrieve data" });
+    });
+});
+
 router.post("/", (req, res) => {
   console.log(req.body);
   Project.insert(req.body)
@@ -50,5 +61,23 @@ router.put("/:id", (req, res) => {
       res.status(500).json({ message: "something happened" });
     });
 });
+
+function validateId(req, res, next) {
+  const id = req.params.id;
+  console.log(id);
+  Project.get(id)
+    .then(data => {
+      console.log(data);
+      if (data.actions.length > 1) {
+        req.action = data;
+        next();
+      } else {
+        res.status(400).json({ message: "project has no actions" });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "ID NOT VALID" });
+    });
+}
 
 module.exports = router;
