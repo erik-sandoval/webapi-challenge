@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+  I learned about Express.Router, and express.json to convert objects into json.
+
 - [ ] Describe Middleware?
+
+  Middleware is a function that you can call before your route to do a certain task like validate and endpoint before it executes.
 
 - [ ] Describe a Resource?
 
+  A resouce is data the client is trying to retrieve.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+  It can return a status code and a json message letting them know it was successful.
+
 - [ ] How can we partition our application into sub-applications?
+
+  We can partition our application but using module exports and linking them in our server.js file.
 
 ## Project Setup
 
